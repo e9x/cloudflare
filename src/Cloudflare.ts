@@ -42,24 +42,39 @@ export default class Cloudflare {
 		this.key = key;
 		this.email = email;
 	}
-	get<T>(url: string) {
-		return this.fetch<T>(new Request(resolveClient(url)));
+	/**
+	 * Send a GET request
+	 */
+	get<T>(api: string) {
+		return this.fetch<T>(new Request(resolveClient(api)));
 	}
-	delete<T>(url: string) {
-		return this.fetch<T>(new Request(url, { method: 'DELETE' }));
+	/**
+	 * Send a DELETE request
+	 */
+	delete<T>(api: string) {
+		return this.fetch<T>(new Request(resolveClient(api), { method: 'DELETE' }));
 	}
-	post<T>(url: string, body: unknown) {
-		return this.upload<T>(url, 'POST', body);
+	/**
+	 * Send a POST request
+	 */
+	post<T>(api: string, body: unknown) {
+		return this.upload<T>(api, 'POST', body);
 	}
-	patch<T>(url: string, body: unknown) {
-		return this.upload<T>(url, 'PATCH', body);
+	/**
+	 * Send a PATCH request
+	 */
+	patch<T>(api: string, body: unknown) {
+		return this.upload<T>(api, 'PATCH', body);
 	}
-	put<T>(url: string, body: unknown) {
-		return this.upload<T>(url, 'PUT', body);
+	/**
+	 * Send a PUT request
+	 */
+	put<T>(api: string, body: unknown) {
+		return this.upload<T>(api, 'PUT', body);
 	}
-	private upload<T>(url: string, method: RequestInit['method'], body: unknown) {
+	private upload<T>(api: string, method: RequestInit['method'], body: unknown) {
 		return this.fetch<T>(
-			new Request(resolveClient(url), {
+			new Request(resolveClient(api), {
 				method,
 				headers: {
 					'content-type': 'application/json',
