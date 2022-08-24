@@ -1,6 +1,8 @@
 # Cloudflare
 
-This repository allows you to easily work with Cloudflare APIs.
+<a href="https://www.npmjs.com/package/@e9x/cloudflare"><img src="https://img.shields.io/npm/v/@e9x/cloudflare.svg?maxAge=3600" alt="npm version" /></a>
+
+This package allows you to easily work with Cloudflare APIs.
 
 Although basic, typedefs are important for reliability and understanding of what a client is doing.
 
