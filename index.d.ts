@@ -1,2 +1,2 @@
-export { default } from './src/Cloudflare';
-export * from './src/Cloudflare';
+export { default } from './dist/Cloudflare';
+export * from './dist/Cloudflare';
