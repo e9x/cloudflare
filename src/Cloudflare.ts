@@ -42,33 +42,23 @@ export default class Cloudflare {
 		this.key = key;
 		this.email = email;
 	}
-	/**
-	 * Send a GET request
-	 */
+	/** Send a GET request */
 	get<T>(api: string) {
 		return this.fetch<T>(new Request(resolveClient(api)));
 	}
-	/**
-	 * Send a DELETE request
-	 */
+	/** Send a DELETE request */
 	delete<T>(api: string) {
 		return this.fetch<T>(new Request(resolveClient(api), { method: 'DELETE' }));
 	}
-	/**
-	 * Send a POST request
-	 */
+	/** Send a POST request */
 	post<T>(api: string, body: unknown) {
 		return this.upload<T>(api, 'POST', body);
 	}
-	/**
-	 * Send a PATCH request
-	 */
+	/** Send a PATCH request */
 	patch<T>(api: string, body: unknown) {
 		return this.upload<T>(api, 'PATCH', body);
 	}
-	/**
-	 * Send a PUT request
-	 */
+	/** Send a PUT request */
 	put<T>(api: string, body: unknown) {
 		return this.upload<T>(api, 'PUT', body);
 	}
