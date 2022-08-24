@@ -1,0 +1,41 @@
+{
+	"name": "@e9x/cloudflare",
+	"version": "1.0.0",
+	"description": "Library to work with Cloudflare APIs",
+	"exports": {
+		".": "./dist/Cloudflare.js",
+		"./v4": "./dist/v4.js"
+	},
+	"scripts": {
+		"build": "tsc",
+		"build:watch": "tsc --watch"
+	},
+	"type": "module",
+	"author": "",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/e9x/cloudflare.git"
+	},
+	"license": "GPLv3",
+	"files": [
+		"dist",
+		"index.d.ts",
+		"v4.d.ts"
+	],
+	"keywords": [
+		"cloudflare",
+		"api",
+		"wrapper"
+	],
+	"devDependencies": {
+		"@ianvs/prettier-plugin-sort-imports": "^3.4.2",
+		"@types/node": "^18.0.3",
+		"@typescript-eslint/eslint-plugin": "^5.30.5",
+		"eslint": "^8.19.0",
+		"prettier": "^2.7.1",
+		"typescript": "^4.7.4"
+	},
+	"dependencies": {
+		"node-fetch": "^3.2.9"
+	}
+}
