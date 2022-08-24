@@ -13,10 +13,6 @@ Although basic, typedefs are important for reliability and understanding of what
 ## Request API
 
 ```ts
-import Cloudflare from '@e9x/cloudflare';
-```
-
-```ts
 export default class Cloudflare {
     constructor({ key, email }: {
         key: string;
@@ -35,7 +31,7 @@ export default class Cloudflare {
 }
 ```
 
-The `body` parameter of post, patch, and put are JSON-stringifyable objects that are stringified and used as the request body. The type parameter for body may be manually specified to be more strictly typed. See the adding a DNS record example below.
+The `body` parameter of post, patch, and put are JSON-stringifyable objects that are stringified and used as the request body. The type parameter for body may be manually specified to be more strictly typed. See [Add a DNS record](#add-a-dns-record).
 
 
 The `api` parameter of all methods is a URL relative that originates from https://api.cloudflare.com/client/. The URL is resolved using the built-in URL class. The following URLs are valid examples:
@@ -49,12 +45,12 @@ Try to keep your API urls simple.
 
 V4 typedefs may be explored in the `.d.ts` file.
 
-Import the library
+### Import the library
 ```ts
 import Cloudflare from '@e9x/cloudflare';
 ```
 
-Create an instance
+### Create an instance
 ```ts
 const cf = new Cloudflare({
 	key: 'API key',
@@ -62,14 +58,14 @@ const cf = new Cloudflare({
 });
 ```
 
-List all zones in account
+### List all zones in account
 ```ts
 import { listAllZones } from '@e9x/cloudflare/v4';
 // ...
 for await (const zone of listAllZones(cf)) console.log(zone); // { id: ..., name: ... }
 ```
 
-Update some zone settings
+### Update some zone settings
 ```ts
 await cf.patch(`v4/zones/${zone.id}/settings/always_use_https`, {
 	value: 'on',
@@ -80,7 +76,7 @@ await cf.patch(`v4/zones/${zone.id}/settings/ssl`, {
 });
 ```
 
-Add a DNS record
+### Add a DNS record
 ```ts
 await cf.post<DNSRecord, AddDNSRecord>(`v4/zones/${zone.id}/dns_records`, {
 	type: 'A',
@@ -90,7 +86,7 @@ await cf.post<DNSRecord, AddDNSRecord>(`v4/zones/${zone.id}/dns_records`, {
 });
 ```
 
-List zone DNS records (validate the above worked)
+### List zone DNS records (validate the above worked)
 ```ts
 const records = await cf.get<DNSRecord[]>(`v4/zones/${zone.id}/dns_records`);
 console.log(records);
