@@ -6,6 +6,8 @@ This package allows you to easily work with Cloudflare APIs.
 
 Although basic, typedefs are important for reliability and understanding of what a client is doing.
 
+This library is intended for projects using TypeScript and ESM.
+
 ## Objective
 
 - Provide a lightweight library with minimal dependencies.
@@ -58,9 +60,15 @@ The `api` parameter of all methods is a URL relative that originates from https:
 
 Try to keep your API urls simple.
 
-## Usage (TS)
+## Usage
 
 V4 typedefs may be explored in the `.d.ts` file.
+
+### Import a type
+
+```ts
+import type { Zone } from '@e9x/cloudflare/v4';
+```
 
 ### Import the library
 
