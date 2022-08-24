@@ -9,6 +9,21 @@ Although basic, typedefs are important for reliability and understanding of what
 - Provide a lightweight library with minimal dependencies.
 - Provide a wrapper that satisfies how Cloudflare returns errors and processes requests.
 - Provide several stubs for the latest Cloudflare API (Zones, DNS, Rules).
+- [Extendability](#Extendability)
+
+## Extendability
+
+If an API stub is missing some fields or you feel like some interfaces are missing, you can add them locally and create a PR.
+
+```ts
+// Add 'missingField'
+
+declare module '@e9x/cloudflare/v4' {
+	interface Zone {
+		missingField: boolean;
+	}
+}
+```
 
 ## Request API
 
@@ -46,11 +61,13 @@ Try to keep your API urls simple.
 V4 typedefs may be explored in the `.d.ts` file.
 
 ### Import the library
+
 ```ts
 import Cloudflare from '@e9x/cloudflare';
 ```
 
 ### Create an instance
+
 ```ts
 const cf = new Cloudflare({
 	key: 'API key',
@@ -59,6 +76,7 @@ const cf = new Cloudflare({
 ```
 
 ### List all zones in account
+
 ```ts
 import { listAllZones } from '@e9x/cloudflare/v4';
 // ...
@@ -66,6 +84,7 @@ for await (const zone of listAllZones(cf)) console.log(zone); // { id: ..., name
 ```
 
 ### Update some zone settings
+
 ```ts
 await cf.patch(`v4/zones/${zone.id}/settings/always_use_https`, {
 	value: 'on',
@@ -77,6 +96,7 @@ await cf.patch(`v4/zones/${zone.id}/settings/ssl`, {
 ```
 
 ### Add a DNS record
+
 ```ts
 await cf.post<DNSRecord, AddDNSRecord>(`v4/zones/${zone.id}/dns_records`, {
 	type: 'A',
@@ -87,6 +107,7 @@ await cf.post<DNSRecord, AddDNSRecord>(`v4/zones/${zone.id}/dns_records`, {
 ```
 
 ### List zone DNS records (validate the above worked)
+
 ```ts
 const records = await cf.get<DNSRecord[]>(`v4/zones/${zone.id}/dns_records`);
 console.log(records);
