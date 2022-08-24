@@ -1,7 +1,7 @@
 import type Cloudflare from './Cloudflare.js';
 
 /**
- * POST zones/:zone_identifier/dns_records
+ * POST v4/zones/:zone_identifier/dns_records
  */
 export interface AddDNSRecord {
 	type: DNSRecord['type'];
@@ -9,7 +9,7 @@ export interface AddDNSRecord {
 	content: string;
 	ttl: number;
 	priority?: number;
-	proxied: boolean;
+	proxied?: boolean;
 }
 
 export interface Zone {
