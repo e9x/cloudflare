@@ -53,30 +53,34 @@ export default class Cloudflare {
 		);
 	}
 	/** Send a POST request */
-	post<ResponseType, BodyType>(api: string, body: BodyType) {
+	post<ResponseType, BodyType>(api: string, body?: BodyType) {
 		return this.upload<ResponseType>(api, 'POST', body);
 	}
 	/** Send a PATCH request */
-	patch<ResponseType, BodyType>(api: string, body: BodyType) {
+	patch<ResponseType, BodyType>(api: string, body?: BodyType) {
 		return this.upload<ResponseType>(api, 'PATCH', body);
 	}
 	/** Send a PUT request */
-	put<ResponseType, BodyType>(api: string, body: BodyType) {
+	put<ResponseType, BodyType>(api: string, body?: BodyType) {
 		return this.upload<ResponseType>(api, 'PUT', body);
 	}
 	private upload<ResponseType>(
 		api: string,
 		method: RequestInit['method'],
-		body: unknown
+		body?: unknown
 	) {
 		return this.fetch<ResponseType>(
-			new Request(resolveClient(api), {
-				method,
-				headers: {
-					'content-type': 'application/json',
-				},
-				body: JSON.stringify(body),
-			})
+			body
+				? new Request(resolveClient(api), {
+						method,
+						headers: {
+							'content-type': 'application/json',
+						},
+						body: JSON.stringify(body),
+				  })
+				: new Request(resolveClient(api), {
+						method,
+				  })
 		);
 	}
 	private async fetch<T>(request: Request) {
