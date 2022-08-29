@@ -16,6 +16,10 @@ export interface Zone {
 	id: string;
 	name: string;
 	status: 'active' | 'inactive';
+	paused: boolean;
+	development_mode: 0 | 1;
+	name_servers: string[];
+	original_name_servers: string[];
 }
 
 export interface Setting<V = unknown> {
