@@ -1,6 +1,6 @@
 {
 	"name": "@e9x/cloudflare",
-	"version": "1.0.0-readme1",
+	"version": "1.0.1",
 	"description": "Library to work with Cloudflare APIs",
 	"exports": {
 		".": "./dist/Cloudflare.js",

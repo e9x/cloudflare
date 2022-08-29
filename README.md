@@ -42,11 +42,11 @@ export default class Cloudflare {
     /** Send a DELETE request */
     delete<ResponseType>(api: string): Promise<ResponseType>;
     /** Send a POST request */
-    post<ResponseType, BodyType>(api: string, body: BodyType): Promise<ResponseType>;
+    post<ResponseType, BodyType>(api: string, body?: BodyType): Promise<ResponseType>;
     /** Send a PATCH request */
-    patch<ResponseType, BodyType>(api: string, body: BodyType): Promise<ResponseType>;
+    patch<ResponseType, BodyType>(api: string, body?: BodyType): Promise<ResponseType>;
     /** Send a PUT request */
-    put<ResponseType, BodyType>(api: string, body: BodyType): Promise<ResponseType>;
+    put<ResponseType, BodyType>(api: string, body?: BodyType): Promise<ResponseType>;
 }
 ```
 
