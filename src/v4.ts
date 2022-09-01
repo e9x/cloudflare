@@ -15,7 +15,7 @@ export interface AddDNSRecord {
 export interface Zone {
 	id: string;
 	name: string;
-	status: 'active' | 'inactive';
+	status: 'active' | 'inactive' | 'pending';
 	paused: boolean;
 	development_mode: 0 | 1;
 	name_servers: string[];
