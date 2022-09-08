@@ -25,8 +25,8 @@ export interface Zone {
 export interface Setting<V = unknown> {
 	id: string;
 	value: V;
-	modified_on: string | null;
-	editable: boolean;
+	modified_on?: string | null;
+	editable?: boolean;
 }
 
 export interface Rule {
