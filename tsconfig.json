@@ -6,6 +6,7 @@
 		"module": "ESNext",
 		"outDir": "dist",
 		"allowSyntheticDefaultImports": true,
+		"stripInternal": true,
 		"moduleResolution": "node",
 		"declaration": true
 	},

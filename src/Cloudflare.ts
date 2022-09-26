@@ -64,6 +64,9 @@ export default class Cloudflare {
 	put<ResponseType, BodyType = unknown>(api: string, body?: BodyType) {
 		return this.upload<ResponseType>(api, 'PUT', body);
 	}
+	/**
+	 * @internal
+	 */
 	private upload<ResponseType>(
 		api: string,
 		method: RequestInit['method'],
@@ -83,6 +86,9 @@ export default class Cloudflare {
 				  })
 		);
 	}
+	/**
+	 * @internal
+	 */
 	private async fetch<T>(request: Request) {
 		request.headers.set('x-auth-key', this.key);
 		request.headers.set('x-auth-email', this.email);
