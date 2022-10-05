@@ -38,6 +38,7 @@ export interface DNSRecord {
 	proxied: boolean;
 	name: string;
 	content: string;
+	ttl: number;
 	type:
 		| 'A'
 		| 'AAAA'
