@@ -22,10 +22,10 @@ If an API stub is missing some fields or you feel like some interfaces are missi
 ```ts
 // Add 'missingField'
 
-declare module '@e9x/cloudflare/v4' {
-	interface Zone {
-		missingField: boolean;
-	}
+declare module "@e9x/cloudflare/v4" {
+  interface Zone {
+    missingField: boolean;
+  }
 }
 ```
 
@@ -33,27 +33,33 @@ declare module '@e9x/cloudflare/v4' {
 
 ```ts
 export default class Cloudflare {
-    constructor({ key, email }: {
-        key: string;
-        email: string;
-    });
-    /** Send a GET request */
-    get<ResponseType>(api: string): Promise<ResponseType>;
-    /** Send a DELETE request */
-    delete<ResponseType>(api: string): Promise<ResponseType>;
-    /** Send a POST request */
-    post<ResponseType, BodyType = unknown>(api: string, body?: BodyType): Promise<ResponseType>;
-    /** Send a PATCH request */
-    patch<ResponseType, BodyType = unknown>(api: string, body?: BodyType): Promise<ResponseType>;
-    /** Send a PUT request */
-    put<ResponseType, BodyType = unknown>(api: string, body?: BodyType): Promise<ResponseType>;
+  constructor({ key, email }: { key: string; email: string });
+  /** Send a GET request */
+  get<ResponseType>(api: string): Promise<ResponseType>;
+  /** Send a DELETE request */
+  delete<ResponseType>(api: string): Promise<ResponseType>;
+  /** Send a POST request */
+  post<ResponseType, BodyType = unknown>(
+    api: string,
+    body?: BodyType
+  ): Promise<ResponseType>;
+  /** Send a PATCH request */
+  patch<ResponseType, BodyType = unknown>(
+    api: string,
+    body?: BodyType
+  ): Promise<ResponseType>;
+  /** Send a PUT request */
+  put<ResponseType, BodyType = unknown>(
+    api: string,
+    body?: BodyType
+  ): Promise<ResponseType>;
 }
 ```
 
 The `body` parameter of post, patch, and put are JSON-stringifyable objects that are stringified and used as the request body. The type parameter for body may be manually specified to be more strictly typed. See [Add a DNS record](#add-a-dns-record).
 
-
 The `api` parameter of all methods is a URL relative that originates from https://api.cloudflare.com/client/. The URL is resolved using the built-in URL class. The following URLs are valid examples:
+
 - `http://alt-cloudflare-api/`
 - `../client/v4/user`
 - `v4/user`
@@ -67,28 +73,29 @@ V4 typedefs may be explored in the `.d.ts` file.
 ### Import a type
 
 ```ts
-import type { Zone } from '@e9x/cloudflare/v4';
+import type { Zone } from "@e9x/cloudflare/v4";
 ```
 
 ### Import the library
 
 ```ts
-import Cloudflare from '@e9x/cloudflare';
+import Cloudflare from "@e9x/cloudflare";
 ```
 
 ### Create an instance
 
 ```ts
 const cf = new Cloudflare({
-	key: 'API key',
-	email: 'API email',
+  key: "API key",
+  email: "API email",
 });
 ```
 
 ### List all zones in account
 
 ```ts
-import { listAllZones } from '@e9x/cloudflare/v4';
+import { listAllZones } from "@e9x/cloudflare/v4";
+
 // ...
 for await (const zone of listAllZones(cf)) console.log(zone); // { id: ..., name: ... }
 ```
@@ -97,11 +104,11 @@ for await (const zone of listAllZones(cf)) console.log(zone); // { id: ..., name
 
 ```ts
 await cf.patch(`v4/zones/${zone.id}/settings/always_use_https`, {
-	value: 'on',
+  value: "on",
 });
 
 await cf.patch(`v4/zones/${zone.id}/settings/ssl`, {
-	value: 'full',
+  value: "full",
 });
 ```
 
@@ -109,10 +116,10 @@ await cf.patch(`v4/zones/${zone.id}/settings/ssl`, {
 
 ```ts
 await cf.post<DNSRecord, AddDNSRecord>(`v4/zones/${zone.id}/dns_records`, {
-	type: 'A',
-	name: `www.${zone.name}`,
-	content: '1.1.1.1',
-	ttl: 1,
+  type: "A",
+  name: `www.${zone.name}`,
+  content: "1.1.1.1",
+  ttl: 1,
 });
 ```
 

@@ -1,14 +1,14 @@
 {
-	"compilerOptions": {
-		"types": ["node"],
-		"lib": ["ESNext", "DOM"],
-		"target": "ESNext",
-		"module": "ESNext",
-		"outDir": "dist",
-		"allowSyntheticDefaultImports": true,
-		"stripInternal": true,
-		"moduleResolution": "node",
-		"declaration": true
-	},
-	"include": ["src/**/*"]
+  "compilerOptions": {
+    "types": ["node"],
+    "lib": ["ESNext", "DOM"],
+    "target": "ESNext",
+    "module": "ESNext",
+    "outDir": "dist",
+    "allowSyntheticDefaultImports": true,
+    "stripInternal": true,
+    "moduleResolution": "node",
+    "declaration": true
+  },
+  "include": ["src/**/*"]
 }
