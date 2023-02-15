@@ -24,8 +24,8 @@ export interface CloudflareError {
 export interface CloudflareResponse<T> {
   success: boolean;
   result: T;
-  errors: CloudflareError[];
-  messages: string[];
+  errors: CloudflareError[] | null;
+  messages: string[] | null;
 }
 
 function resolveClient(url: string) {
@@ -33,6 +33,33 @@ function resolveClient(url: string) {
     url.toString(),
     "https://api.cloudflare.com/client/"
   ).toString();
+}
+
+function isCloudflareResponse<T>(body: unknown): body is CloudflareResponse<T> {
+  const b = body as Partial<CloudflareResponse<T>>;
+
+  return (
+    typeof body === "object" &&
+    body !== null &&
+    "success" in body &&
+    typeof body.success === "boolean" &&
+    (b.errors === null || Array.isArray(b.errors)) &&
+    (b.messages === null ||
+      (Array.isArray(b.messages) &&
+        b.messages.every((e) => typeof e === "string")))
+  );
+}
+
+/**
+ * Throw error with text
+ */
+function parseCloudflareJSON(text: string): unknown {
+  try {
+    return JSON.parse(text);
+  } catch (err) {
+    (err as SyntaxError & { text?: string }).text = text;
+    throw err;
+  }
 }
 
 export default class Cloudflare {
@@ -95,14 +122,25 @@ export default class Cloudflare {
 
     const res = await fetch(request);
 
-    const { success, result, errors, messages } = <CloudflareResponse<T>>(
-      await res.json()
-    );
+    const text = await res.text();
 
-    for (const message of messages) console.warn(message);
+    const body = parseCloudflareJSON(text);
 
-    if (!success) throw new Error("\n" + errors.map(formatError).join("\n"));
+    if (!isCloudflareResponse<T>(body))
+      throw new Error(
+        `Failure processing response. Got ${res.status} ${res.statusText}`
+      );
 
-    return result;
+    if (body.messages)
+      for (const message of body.messages) console.warn(message);
+
+    if (!body.success)
+      throw new Error(
+        body.errors
+          ? `Cloudflare error:\n${body.errors.map(formatError).join("\n")}`
+          : "Unknown Cloudflare error"
+      );
+
+    return body.result;
   }
 }
