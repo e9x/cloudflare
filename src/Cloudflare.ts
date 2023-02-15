@@ -39,8 +39,7 @@ function isCloudflareResponse<T>(body: unknown): body is CloudflareResponse<T> {
   return (
     typeof body === "object" &&
     body !== null &&
-    "success" in body &&
-    typeof body.success === "boolean" &&
+    typeof b.success === "boolean" &&
     (b.errors === null || Array.isArray(b.errors)) &&
     (b.messages === null ||
       (Array.isArray(b.messages) &&
