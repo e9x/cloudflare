@@ -1,5 +1,3 @@
-import fetch, { Request } from "node-fetch";
-
 export function formatError({ code, message, error_chain }: CloudflareError) {
   const result = [`Error ${code}: ${message}`];
 

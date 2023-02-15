@@ -27,6 +27,9 @@
     "api",
     "wrapper"
   ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^3.4.2",
     "@types/node": "^18.0.3",
@@ -34,8 +37,5 @@
     "eslint": "^8.19.0",
     "prettier": "^2.7.1",
     "typescript": "^4.7.4"
-  },
-  "dependencies": {
-    "node-fetch": "^3.2.9"
   }
 }
